@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Navbar.css
+   Requires tokens.css to be imported in the app before this file.
+   ========================================================================== */
+
+.ir-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(250, 249, 246, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.ir-navbar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-family: var(--ir-font-body);
+}
+
+/* Brand */
+.ir-navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--ir-ink);
+}
+
+.ir-navbar__brand-mark {
+  display: block;
+  flex-shrink: 0;
+}
+
+.ir-navbar__brand-name {
+  font-family: var(--ir-font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ir-ink);
+}
+
+/* Desktop nav links */
+.ir-navbar__links {
+  display: none;
+  align-items: center;
+  gap: 36px;
+}
+
+.ir-navbar__link {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  text-decoration: none;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s var(--ir-ease);
+}
+
+.ir-navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1.5px;
+  background: var(--ir-signal);
+  transition: width 0.25s var(--ir-ease);
+}
+
+.ir-navbar__link:hover {
+  color: var(--ir-ink);
+}
+
+.ir-navbar__link:hover::after {
+  width: 100%;
+}
+
+/* Actions */
+.ir-navbar__actions {
+  display: none;
+  align-items: center;
+  gap: 18px;
+}
+
+.ir-navbar__chip {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  background: var(--ir-signal-soft);
+  border-radius: var(--ir-radius-pill);
+  padding: 7px 14px;
+}
+
+.ir-navbar__chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ir-signal);
+  flex-shrink: 0;
+}
+
+.ir-navbar__chip-text {
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ir-signal-dark);
+  letter-spacing: 0.01em;
+}
+
+.ir-navbar__login {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  text-decoration: none;
+  transition: color 0.2s var(--ir-ease);
+}
+
+.ir-navbar__login:hover {
+  color: var(--ir-ink);
+}
+
+.ir-navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--ir-signal);
+  color: var(--ir-paper);
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--ir-radius-pill);
+  transition: background 0.2s var(--ir-ease), transform 0.2s var(--ir-ease),
+    box-shadow 0.2s var(--ir-ease);
+  box-shadow: var(--ir-shadow-sm);
+}
+
+.ir-navbar__cta:hover {
+  background: var(--ir-signal-dark);
+  box-shadow: var(--ir-shadow-md);
+}
+
+.ir-navbar__cta-icon {
+  transition: transform 0.2s var(--ir-ease);
+}
+
+.ir-navbar__cta:hover .ir-navbar__cta-icon {
+  transform: translateX(2px);
+}
+
+/* Mobile toggle */
+.ir-navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 8px;
+  margin: -8px;
+  border-radius: var(--ir-radius-sm);
+  color: var(--ir-ink);
+  cursor: pointer;
+}
+
+.ir-navbar__toggle:focus-visible {
+  outline: 2px solid var(--ir-signal);
+  outline-offset: 2px;
+}
+
+/* Mobile panel */
+.ir-navbar__mobile {
+  border-top: 1px solid var(--ir-line);
+  background: var(--ir-paper);
+  padding: 8px 24px 28px;
+  animation: ir-navbar-drop 0.22s var(--ir-ease);
+}
+
+@keyframes ir-navbar-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ir-navbar__mobile-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-navbar__mobile-link {
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  text-decoration: none;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(222, 218, 208, 0.7);
+}
+
+.ir-navbar__mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.ir-navbar__mobile-login {
+  text-align: center;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ir-ink);
+  text-decoration: none;
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-pill);
+  padding: 11px;
+}
+
+.ir-navbar__mobile-cta {
+  text-align: center;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ir-paper);
+  text-decoration: none;
+  background: var(--ir-signal);
+  border-radius: var(--ir-radius-pill);
+  padding: 11px;
+}
+
+/* Breakpoints */
+@media (min-width: 1024px) {
+  .ir-navbar__links {
+    display: flex;
+  }
+  .ir-navbar__actions {
+    display: flex;
+  }
+  .ir-navbar__toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ir-navbar__chip {
+    display: flex;
+  }
+}

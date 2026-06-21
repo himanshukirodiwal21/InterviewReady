@@ -1,0 +1,45 @@
+/* ==========================================================================
+   tokens.css
+   Shared design tokens for InterviewReady. Import this once in your app
+   entry (e.g. main.jsx / App.jsx) before any component CSS.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Color */
+  --ir-ink: #14171f;
+  --ir-ink-70: rgba(20, 23, 31, 0.7);
+  --ir-ink-60: rgba(20, 23, 31, 0.6);
+  --ir-ink-45: rgba(20, 23, 31, 0.45);
+  --ir-ink-35: rgba(20, 23, 31, 0.35);
+
+  --ir-paper: #faf9f6;
+  --ir-white: #ffffff;
+
+  --ir-signal: #2d5a4a;
+  --ir-signal-dark: #1f4337;
+  --ir-signal-soft: #e4eee8;
+
+  --ir-accent: #d6772f;
+  --ir-line: #dedad0;
+
+  /* Type */
+  --ir-font-display: "Fraunces", Georgia, serif;
+  --ir-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --ir-font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* Shadow */
+  --ir-shadow-sm: 0 1px 2px rgba(20, 23, 31, 0.04);
+  --ir-shadow-md: 0 4px 16px rgba(20, 23, 31, 0.06);
+  --ir-shadow-lg: 0 16px 40px rgba(20, 23, 31, 0.10);
+
+  /* Radius */
+  --ir-radius-sm: 8px;
+  --ir-radius-md: 14px;
+  --ir-radius-lg: 20px;
+  --ir-radius-pill: 999px;
+
+  /* Motion */
+  --ir-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Login.css
+   Requires tokens.css to be imported in the app before this file.
+   Covers: login, signup (3-step with OTP), and admin login — all rendered
+   from the same Login.jsx component.
+   ========================================================================== */
+
+.ir-auth {
+  min-height: calc(100svh - 1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--ir-paper);
+  padding: 40px 20px;
+  font-family: var(--ir-font-body);
+}
+
+.ir-auth__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--ir-white);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-lg);
+  box-shadow: var(--ir-shadow-lg);
+  padding: 36px;
+}
+
+/* ---------------------------- Tabs (Login / Sign Up) ---------------------------- */
+
+.ir-auth__tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--ir-signal-soft);
+  border-radius: var(--ir-radius-md);
+  padding: 4px;
+  margin-bottom: 28px;
+}
+
+.ir-auth__tab {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: calc(var(--ir-radius-md) - 4px);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--ir-font-body);
+  border: none;
+  background: transparent;
+  color: var(--ir-ink-60);
+  cursor: pointer;
+  transition: background 0.2s var(--ir-ease), color 0.2s var(--ir-ease),
+    box-shadow 0.2s var(--ir-ease);
+}
+
+.ir-auth__tab--active {
+  background: var(--ir-white);
+  color: var(--ir-signal);
+  box-shadow: var(--ir-shadow-sm);
+}
+
+/* ---------------------------------- Headings ---------------------------------- */
+
+.ir-auth__heading {
+  font-family: var(--ir-font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ir-ink);
+  text-align: center;
+  margin: 0 0 22px;
+}
+
+.ir-auth__subtext {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ir-ink-60);
+  margin: 0 0 20px;
+}
+
+/* ----------------------------------- Fields ----------------------------------- */
+
+.ir-auth__field {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.ir-auth__label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  margin-bottom: 6px;
+}
+
+.ir-auth__input-icon {
+  position: absolute;
+  left: 13px;
+  top: 38px;
+  color: var(--ir-ink-35);
+  pointer-events: none;
+}
+
+.ir-auth__input {
+  width: 100%;
+  font-family: var(--ir-font-body);
+  font-size: 14.5px;
+  color: var(--ir-ink);
+  background: var(--ir-paper);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-sm);
+  padding: 11px 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s var(--ir-ease), box-shadow 0.2s var(--ir-ease);
+}
+
+.ir-auth__input--with-icon {
+  padding-left: 40px;
+}
+
+.ir-auth__input::placeholder {
+  color: var(--ir-ink-35);
+}
+
+.ir-auth__input:focus {
+  border-color: var(--ir-signal);
+  box-shadow: 0 0 0 3px var(--ir-signal-soft);
+}
+
+.ir-auth__input--otp {
+  text-align: center;
+  font-family: var(--ir-font-mono);
+  font-size: 22px;
+  letter-spacing: 10px;
+  padding-left: 14px;
+}
+
+.ir-auth__toggle-visibility {
+  position: absolute;
+  right: 12px;
+  top: 36px;
+  display: inline-flex;
+  background: none;
+  border: none;
+  color: var(--ir-ink-45);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ir-auth__toggle-visibility:hover {
+  color: var(--ir-ink-70);
+}
+
+.ir-auth__error {
+  font-size: 12.5px;
+  color: #c0392b;
+  margin-top: 5px;
+}
+
+.ir-auth__forgot-row {
+  text-align: right;
+  margin: -6px 0 16px;
+}
+
+.ir-auth__forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ir-signal);
+  text-decoration: none;
+}
+
+.ir-auth__forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------- Buttons ---------------------------------- */
+
+.ir-auth__button {
+  width: 100%;
+  font-family: var(--ir-font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ir-paper);
+  background: var(--ir-signal);
+  border: none;
+  border-radius: var(--ir-radius-pill);
+  padding: 13px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s var(--ir-ease), box-shadow 0.2s var(--ir-ease),
+    transform 0.2s var(--ir-ease);
+  box-shadow: var(--ir-shadow-sm);
+}
+
+.ir-auth__button:hover:not(:disabled) {
+  background: var(--ir-signal-dark);
+  box-shadow: var(--ir-shadow-md);
+}
+
+.ir-auth__button:disabled {
+  background: var(--ir-line);
+  color: var(--ir-ink-45);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.ir-auth__button--ghost {
+  background: transparent;
+  color: var(--ir-signal);
+  border: 1px solid var(--ir-line);
+  box-shadow: none;
+}
+
+.ir-auth__button--ghost:hover:not(:disabled) {
+  background: var(--ir-signal-soft);
+  box-shadow: none;
+}
+
+.ir-auth__button--text {
+  background: transparent;
+  color: var(--ir-ink-60);
+  box-shadow: none;
+}
+
+.ir-auth__button--text:hover:not(:disabled) {
+  background: var(--ir-paper);
+  box-shadow: none;
+}
+
+.ir-auth__button--admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--ir-ink);
+}
+
+.ir-auth__button--admin:hover:not(:disabled) {
+  background: var(--ir-ink);
+  opacity: 0.88;
+}
+
+/* ----------------------------------- Divider ----------------------------------- */
+
+.ir-auth__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+  font-size: 13px;
+  color: var(--ir-ink-35);
+}
+
+.ir-auth__divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--ir-line);
+}
+
+/* --------------------------------- Step indicator --------------------------------- */
+
+.ir-auth__steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.ir-auth__step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ir-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ir-paper);
+  background: var(--ir-line);
+  transition: background 0.2s var(--ir-ease);
+}
+
+.ir-auth__step-circle--active {
+  background: var(--ir-signal);
+}
+
+.ir-auth__step-line {
+  width: 36px;
+  height: 2px;
+  background: var(--ir-line);
+  transition: background 0.2s var(--ir-ease);
+}
+
+.ir-auth__step-line--active {
+  background: var(--ir-signal);
+}
+
+/* ----------------------------------- OTP step ----------------------------------- */
+
+.ir-auth__otp-sent {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ir-ink-60);
+  margin: 0 0 18px;
+}
+
+.ir-auth__otp-sent strong {
+  color: var(--ir-ink);
+}
+
+/* -------------------------------- Success (step 3) -------------------------------- */
+
+.ir-auth__success {
+  text-align: center;
+}
+
+.ir-auth__success-icon {
+  color: var(--ir-signal);
+  margin-bottom: 14px;
+}
+
+.ir-auth__success-heading {
+  font-family: var(--ir-font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ir-ink);
+  margin: 0 0 18px;
+}
+
+.ir-auth__success-box {
+  background: var(--ir-signal-soft);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-md);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.ir-auth__success-row {
+  font-size: 13.5px;
+  color: var(--ir-ink-70);
+  margin: 7px 0;
+}
+
+.ir-auth__success-row strong {
+  color: var(--ir-ink);
+}
+
+/* ----------------------------------- Admin icon ----------------------------------- */
+
+.ir-auth__admin-head {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.ir-auth__admin-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--ir-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ir-auth__admin-title {
+  font-family: var(--ir-font-display);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ir-ink);
+  margin: 0 0 6px;
+}
+
+.ir-auth__admin-subtext {
+  font-size: 13.5px;
+  color: var(--ir-ink-60);
+  margin: 0;
+}

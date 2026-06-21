@@ -1,0 +1,670 @@
+/* ==========================================================================
+   Home.css
+   Requires tokens.css to be imported in the app before this file.
+   ========================================================================== */
+
+.ir-home {
+  background: var(--ir-paper);
+  color: var(--ir-ink);
+  font-family: var(--ir-font-body);
+}
+
+.ir-home * {
+  box-sizing: border-box;
+}
+
+.ir-home__section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---------------------------------- Hero ---------------------------------- */
+
+.ir-hero {
+  border-bottom: 1px solid var(--ir-line);
+  position: relative;
+  overflow: hidden;
+}
+
+.ir-hero__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 32px;
+  display: grid;
+  gap: 56px;
+  align-items: center;
+}
+
+.ir-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ir-white);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-pill);
+  padding: 7px 14px;
+}
+
+.ir-hero__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ir-signal);
+  flex-shrink: 0;
+}
+
+.ir-hero__eyebrow-text {
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  letter-spacing: 0.01em;
+}
+
+.ir-hero__title {
+  font-family: var(--ir-font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.07;
+  font-size: 40px;
+  margin: 24px 0 0;
+}
+
+.ir-hero__title-accent {
+  color: var(--ir-signal);
+}
+
+.ir-hero__body {
+  margin: 22px 0 0;
+  max-width: 440px;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--ir-ink-60);
+}
+
+.ir-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.ir-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ir-signal);
+  color: var(--ir-paper);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: var(--ir-radius-pill);
+  box-shadow: var(--ir-shadow-md);
+  transition: background 0.2s var(--ir-ease), box-shadow 0.2s var(--ir-ease),
+    transform 0.2s var(--ir-ease);
+}
+
+.ir-hero__cta:hover {
+  background: var(--ir-signal-dark);
+  box-shadow: var(--ir-shadow-lg);
+  transform: translateY(-1px);
+}
+
+.ir-hero__cta-icon {
+  transition: transform 0.2s var(--ir-ease);
+}
+
+.ir-hero__cta:hover .ir-hero__cta-icon {
+  transform: translateX(2px);
+}
+
+.ir-hero__secondary-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ir-ink-70);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s var(--ir-ease), border-color 0.2s var(--ir-ease);
+}
+
+.ir-hero__secondary-link:hover {
+  color: var(--ir-ink);
+  border-color: var(--ir-ink-35);
+}
+
+/* ----------------------- Hero signature: transcript panel ----------------------- */
+
+.ir-transcript {
+  position: relative;
+  border-radius: var(--ir-radius-lg);
+  border: 1px solid var(--ir-line);
+  background: var(--ir-white);
+  padding: 24px;
+  box-shadow: var(--ir-shadow-lg);
+}
+
+.ir-transcript__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.ir-transcript__head-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.ir-transcript__rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ir-accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(214, 119, 47, 0.5);
+  animation: ir-rec-pulse 2.4s var(--ir-ease) infinite;
+}
+
+@keyframes ir-rec-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(214, 119, 47, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(214, 119, 47, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(214, 119, 47, 0);
+  }
+}
+
+.ir-transcript__label {
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ir-ink-45);
+}
+
+.ir-transcript__timer {
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+  color: var(--ir-ink-35);
+}
+
+.ir-transcript__question-block {
+  padding: 20px 0;
+}
+
+.ir-transcript__question-tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ir-ink-45);
+  margin: 0;
+}
+
+.ir-transcript__question-text {
+  margin: 9px 0 0;
+  font-size: 16.5px;
+  line-height: 1.4;
+  color: var(--ir-ink);
+}
+
+.ir-transcript__answer-box {
+  min-height: 92px;
+  border-radius: var(--ir-radius-md);
+  background: var(--ir-paper);
+  padding: 16px;
+}
+
+.ir-transcript__answer-placeholder {
+  font-size: 14px;
+  color: var(--ir-ink-35);
+  margin: 0;
+}
+
+.ir-transcript__answer-text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ir-ink-70);
+  margin: 0;
+}
+
+.ir-transcript__caret {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  margin-left: 2px;
+  background: var(--ir-signal);
+  vertical-align: middle;
+  animation: ir-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes ir-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ir-transcript__scores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+  opacity: 0;
+  transition: opacity 0.5s var(--ir-ease);
+}
+
+.ir-transcript__scores--visible {
+  opacity: 1;
+}
+
+.ir-transcript__score-card {
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-sm);
+  padding: 10px;
+}
+
+.ir-transcript__score-label {
+  font-size: 10.5px;
+  color: var(--ir-ink-45);
+  margin: 0;
+}
+
+.ir-transcript__score-value {
+  margin: 3px 0 0;
+  font-family: var(--ir-font-mono);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ir-signal);
+}
+
+/* --------------------------------- Trust strip --------------------------------- */
+
+.ir-trust {
+  border-bottom: 1px solid var(--ir-line);
+  background: var(--ir-white);
+}
+
+.ir-trust__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 44px 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.ir-trust__value {
+  font-family: var(--ir-font-display);
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--ir-ink);
+  margin: 0;
+}
+
+.ir-trust__label {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: var(--ir-ink-60);
+}
+
+/* ------------------------------- Section heading ------------------------------- */
+
+.ir-section {
+  border-bottom: 1px solid var(--ir-line);
+}
+
+.ir-section--white {
+  background: var(--ir-white);
+}
+
+.ir-section__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 88px 32px;
+}
+
+.ir-section__eyebrow {
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ir-signal);
+  margin: 0;
+}
+
+.ir-section__heading {
+  font-family: var(--ir-font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+  font-size: 32px;
+  margin: 12px 0 0;
+  max-width: 520px;
+}
+
+/* ------------------------------- How it works ------------------------------- */
+
+.ir-steps {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.ir-step__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ir-step__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ir-signal-soft);
+  flex-shrink: 0;
+}
+
+.ir-step__number {
+  font-family: var(--ir-font-mono);
+  font-size: 13px;
+  color: var(--ir-ink-35);
+}
+
+.ir-step__title {
+  margin: 16px 0 0;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--ir-ink);
+}
+
+.ir-step__body {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ir-ink-60);
+}
+
+/* ------------------------------- Interview types ------------------------------- */
+
+.ir-types {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.ir-type-card {
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-lg);
+  padding: 28px;
+  background: var(--ir-paper);
+  transition: border-color 0.2s var(--ir-ease), box-shadow 0.2s var(--ir-ease),
+    transform 0.2s var(--ir-ease);
+}
+
+.ir-type-card:hover {
+  border-color: rgba(45, 90, 74, 0.35);
+  box-shadow: var(--ir-shadow-md);
+  transform: translateY(-2px);
+}
+
+.ir-type-card__name {
+  font-family: var(--ir-font-display);
+  font-size: 18.5px;
+  font-weight: 600;
+  color: var(--ir-ink);
+  margin: 0;
+}
+
+.ir-type-card__detail {
+  margin: 11px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ir-ink-60);
+}
+
+.ir-type-card__levels {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.ir-type-card__level {
+  background: var(--ir-white);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-pill);
+  padding: 5px 11px;
+  font-size: 11.5px;
+  color: var(--ir-ink-60);
+}
+
+/* ------------------------------- Scoring section ------------------------------- */
+
+.ir-scoring__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 88px 32px;
+  display: grid;
+  gap: 56px;
+  align-items: center;
+}
+
+.ir-scoring__text-body {
+  margin: 18px 0 0;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ir-ink-60);
+}
+
+.ir-scoring__list {
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.ir-scoring__list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ir-scoring__check-icon {
+  margin-top: 2px;
+  color: var(--ir-signal);
+  flex-shrink: 0;
+}
+
+.ir-scoring__list-text {
+  font-size: 14.5px;
+  color: var(--ir-ink-70);
+  line-height: 1.5;
+}
+
+.ir-scorecard {
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-lg);
+  background: var(--ir-white);
+  padding: 28px;
+  box-shadow: var(--ir-shadow-md);
+}
+
+.ir-scorecard__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ir-ink-45);
+  margin: 0;
+}
+
+.ir-scorecard__total {
+  font-family: var(--ir-font-display);
+  font-size: 46px;
+  font-weight: 600;
+  color: var(--ir-signal);
+  margin: 4px 0 0;
+}
+
+.ir-scorecard__total-max {
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--ir-ink-35);
+}
+
+.ir-scorecard__bars {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ir-scorecard__bar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+}
+
+.ir-scorecard__bar-label {
+  color: var(--ir-ink-70);
+}
+
+.ir-scorecard__bar-weight {
+  color: var(--ir-ink-45);
+  font-family: var(--ir-font-mono);
+  font-size: 12px;
+}
+
+.ir-scorecard__track {
+  margin-top: 7px;
+  height: 6px;
+  width: 100%;
+  border-radius: var(--ir-radius-pill);
+  background: var(--ir-signal-soft);
+  overflow: hidden;
+}
+
+.ir-scorecard__fill {
+  height: 100%;
+  border-radius: var(--ir-radius-pill);
+  background: var(--ir-signal);
+  transition: width 0.6s var(--ir-ease);
+}
+
+/* ----------------------------------- Final CTA ----------------------------------- */
+
+.ir-final-cta {
+  background: var(--ir-ink);
+}
+
+.ir-final-cta__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 88px 32px;
+  text-align: center;
+}
+
+.ir-final-cta__heading {
+  font-family: var(--ir-font-display);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ir-paper);
+  margin: 0;
+}
+
+.ir-final-cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 36px;
+  background: var(--ir-paper);
+  color: var(--ir-ink);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: var(--ir-radius-pill);
+  transition: background 0.2s var(--ir-ease), transform 0.2s var(--ir-ease);
+}
+
+.ir-final-cta__button:hover {
+  background: var(--ir-white);
+  transform: translateY(-1px);
+}
+
+.ir-final-cta__button-icon {
+  transition: transform 0.2s var(--ir-ease);
+}
+
+.ir-final-cta__button:hover .ir-final-cta__button-icon {
+  transform: translateX(2px);
+}
+
+/* ====================================== Breakpoints ====================================== */
+
+@media (min-width: 640px) {
+  .ir-trust__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .ir-types {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .ir-hero__title {
+    font-size: 52px;
+  }
+  .ir-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ir-hero__grid {
+    grid-template-columns: 1.05fr 1fr;
+    padding: 96px 32px;
+  }
+  .ir-hero__title {
+    font-size: 58px;
+  }
+  .ir-scoring__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ir-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ir-transcript__rec-dot,
+  .ir-transcript__caret {
+    animation: none;
+  }
+  .ir-type-card,
+  .ir-hero__cta,
+  .ir-final-cta__button {
+    transition: none;
+  }
+}
