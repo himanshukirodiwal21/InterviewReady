@@ -11,7 +11,7 @@ import {
   EyeOff,
   Shield,
 } from "lucide-react";
-// import api from "../../services/api";
+import api from "../../services/api";
 import "./Login.css";
 
 export default function Login() {
@@ -298,17 +298,15 @@ export default function Login() {
         {currentPage !== "adminLogin" && (
           <div className="ir-auth__tabs">
             <button
-              className={`ir-auth__tab ${
-                currentPage === "login" ? "ir-auth__tab--active" : ""
-              }`}
+              className={`ir-auth__tab ${currentPage === "login" ? "ir-auth__tab--active" : ""
+                }`}
               onClick={switchToLogin}
             >
               Login
             </button>
             <button
-              className={`ir-auth__tab ${
-                currentPage === "signup" ? "ir-auth__tab--active" : ""
-              }`}
+              className={`ir-auth__tab ${currentPage === "signup" ? "ir-auth__tab--active" : ""
+                }`}
               onClick={switchToSignup}
             >
               Sign Up
