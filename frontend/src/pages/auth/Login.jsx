@@ -111,7 +111,7 @@ export default function Login() {
 
     try {
       // correct endpoint + data
-      const res = await api.post("/api/v1/users/login", loginData);
+      const res = await api.post("/users/login", loginData);
 
       // axios response data
       const data = res.data;
@@ -128,26 +128,16 @@ export default function Login() {
       alert("Login successful: " + loginData.email);
       navigate("/", { replace: true });
     } catch (err) {
-      // axios error handling
-      if (err.response?.status === 403 && err.response.data?.needsVerification) {
-        const user = err.response.data.user;
-        setFormData({
-          fullName: user.fullName,
-          username: user.username,
-          email: user.email,
-          password: loginData.password,
-          otp: "",
-        });
-        setLoginData({ email: "", password: "" });
-        setErrors({});
-        setCurrentPage("signup");
-        setStep(2);
-        alert(err.response.data.message);
-      } else {
-        console.error(err);
-        alert(err.response?.data?.message || "Login failed");
-      }
-    } finally {
+  console.log("FULL ERROR:", err);
+  console.log("RESPONSE:", err.response);
+  console.log("DATA:", err.response?.data);
+
+  alert(
+    err.response?.data?.message ||
+    err.message ||
+    "Login failed"
+  );
+} finally {
       setIsSubmitting(false);
     }
   };
@@ -218,6 +208,7 @@ export default function Login() {
     setIsSubmitting(true);
     try {
       const res = await api.post("/api/v1/users/verifyemail", {
+        email: formData.email,
         code: formData.otp,
       });
 
@@ -236,11 +227,8 @@ export default function Login() {
   const handleResendOTP = async () => {
     setIsSubmitting(true);
     try {
-      const res = await api.post("/api/v1/users/register", {
-        fullName: formData.fullName,
-        username: formData.username,
+      const res = await api.post("/api/v1/users/resend-otp", {
         email: formData.email,
-        password: formData.password,
       });
 
       // Properly check status
@@ -298,15 +286,17 @@ export default function Login() {
         {currentPage !== "adminLogin" && (
           <div className="ir-auth__tabs">
             <button
-              className={`ir-auth__tab ${currentPage === "login" ? "ir-auth__tab--active" : ""
-                }`}
+              className={`ir-auth__tab ${
+                currentPage === "login" ? "ir-auth__tab--active" : ""
+              }`}
               onClick={switchToLogin}
             >
               Login
             </button>
             <button
-              className={`ir-auth__tab ${currentPage === "signup" ? "ir-auth__tab--active" : ""
-                }`}
+              className={`ir-auth__tab ${
+                currentPage === "signup" ? "ir-auth__tab--active" : ""
+              }`}
               onClick={switchToSignup}
             >
               Sign Up

@@ -3,6 +3,8 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  verifyEmail,
+  resendOTP,
   refreshAccessToken,
   changeCurrentPassword,
   getCurrentUser,
@@ -16,6 +18,10 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 router.route("/register").post(registerUser);
+
+router.route("/verifyemail").post(verifyEmail);
+
+router.route("/resend-otp").post(resendOTP);
 
 router.route("/login").post(loginUser);
 
