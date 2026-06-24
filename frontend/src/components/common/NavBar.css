@@ -1,4 +1,4 @@
-/* ==========================================================================
+/* /* ==========================================================================
    Navbar.css
    Requires tokens.css to be imported in the app before this file.
    ========================================================================== */
@@ -128,6 +128,25 @@
   color: var(--ir-ink);
 }
 
+.ir-navbar__profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--ir-signal);
+  background: var(--ir-signal-soft);
+  text-decoration: none;
+  transition: background 0.2s var(--ir-ease), transform 0.2s var(--ir-ease);
+}
+
+.ir-navbar__profile:hover {
+  background: var(--ir-signal);
+  color: var(--ir-paper);
+  transform: translateY(-1px);
+}
+
 .ir-navbar__cta {
   display: inline-flex;
   align-items: center;
@@ -228,6 +247,10 @@
 }
 
 .ir-navbar__mobile-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-align: center;
   font-size: 14.5px;
   font-weight: 500;

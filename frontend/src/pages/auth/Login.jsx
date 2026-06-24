@@ -111,7 +111,7 @@ export default function Login() {
 
     try {
       // correct endpoint + data
-      const res = await api.post("/users/login", loginData);
+      const res = await api.post("/api/v1/users/login", loginData);
 
       // axios response data
       const data = res.data;
@@ -125,19 +125,36 @@ export default function Login() {
       };
 
       localStorage.setItem("currentUser", JSON.stringify(userData));
+      window.dispatchEvent(new Event("auth-changed"));
       alert("Login successful: " + loginData.email);
       navigate("/", { replace: true });
     } catch (err) {
-  console.log("FULL ERROR:", err);
-  console.log("RESPONSE:", err.response);
-  console.log("DATA:", err.response?.data);
+      console.log("FULL ERROR:", err);
+      console.log("RESPONSE:", err.response);
+      console.log("DATA:", err.response?.data);
 
-  alert(
-    err.response?.data?.message ||
-    err.message ||
-    "Login failed"
-  );
-} finally {
+      if (err.response?.status === 403 && err.response.data?.needsVerification) {
+        const user = err.response.data.user;
+        setFormData({
+          fullName: user.fullName,
+          username: user.username,
+          email: user.email,
+          password: loginData.password,
+          otp: "",
+        });
+        setLoginData({ email: "", password: "" });
+        setErrors({});
+        setCurrentPage("signup");
+        setStep(2);
+        alert(err.response.data.message);
+      } else {
+        alert(
+          err.response?.data?.message ||
+          err.message ||
+          "Login failed"
+        );
+      }
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -156,6 +173,7 @@ export default function Login() {
           role: "admin",
         };
         localStorage.setItem("currentUser", JSON.stringify(adminData));
+        window.dispatchEvent(new Event("auth-changed"));
         alert("Admin login successful: " + adminLoginData.email);
         navigate("/", { replace: true });
       }

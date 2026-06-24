@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowRight, UserCircle2 } from "lucide-react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png"
 
@@ -10,8 +10,40 @@ const NAV_LINKS = [
   { label: "For teams", href: "#teams" },
 ];
 
+// Reads the logged-in user (if any) straight from localStorage.
+function readCurrentUser() {
+  try {
+    const raw = localStorage.getItem("currentUser");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(readCurrentUser);
+
+  useEffect(() => {
+    // Same-tab login/logout: Login.jsx dispatches this custom event right
+    // after it writes/removes "currentUser" in localStorage, since the
+    // native `storage` event only fires in *other* tabs, not this one.
+    const handleAuthChanged = () => setCurrentUser(readCurrentUser());
+
+    // Cross-tab login/logout: if the user logs in/out in a different tab,
+    // the browser's native `storage` event fires here automatically.
+    const handleStorage = (e) => {
+      if (e.key === "currentUser") setCurrentUser(readCurrentUser());
+    };
+
+    window.addEventListener("auth-changed", handleAuthChanged);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener("auth-changed", handleAuthChanged);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
 
   return (
     <header className="ir-navbar">
@@ -31,13 +63,25 @@ export default function Navbar() {
 
         <div className="ir-navbar__actions">
           <ScoreChip />
-          <a href="/login" className="ir-navbar__login">
-            <span>Login</span>
-          </a>
-          <a href="/signup" className="ir-navbar__cta">
-            Start a mock interview
-            <ArrowRight size={15} strokeWidth={2.25} className="ir-navbar__cta-icon" />
-          </a>
+          {currentUser ? (
+            <a
+              href="/dashboard"
+              className="ir-navbar__profile"
+              aria-label="Go to dashboard"
+            >
+              <UserCircle2 size={28} strokeWidth={1.6} />
+            </a>
+          ) : (
+            <>
+              <a href="/login" className="ir-navbar__login">
+                <span>Login</span>
+              </a>
+              <a href="/signup" className="ir-navbar__cta">
+                Start a mock interview
+                <ArrowRight size={15} strokeWidth={2.25} className="ir-navbar__cta-icon" />
+              </a>
+            </>
+          )}
         </div>
 
         <button
@@ -66,39 +110,29 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="ir-navbar__mobile-actions">
-            <a href="/login" className="ir-navbar__mobile-login">
-              <span>Login</span>
-            </a>
-            <a href="/signup" className="ir-navbar__mobile-cta">
-              Start a mock interview
-            </a>
+            {currentUser ? (
+              <a
+                href="/dashboard"
+                className="ir-navbar__mobile-cta"
+                onClick={() => setOpen(false)}
+              >
+                <UserCircle2 size={18} strokeWidth={1.8} />
+                Go to Dashboard
+              </a>
+            ) : (
+              <>
+                <a href="/login" className="ir-navbar__mobile-login">
+                  <span>Login</span>
+                </a>
+                <a href="/signup" className="ir-navbar__mobile-cta">
+                  Start a mock interview
+                </a>
+              </>
+            )}
           </div>
         </div>
       )}
     </header>
-  );
-}
-
-/* Brand mark: checkmark-in-frame — reads as readiness/clearance. */
-function BrandMark() {
-  return (
-    <svg
-      className="ir-navbar__brand-mark"
-      width="30"
-      height="30"
-      viewBox="0 0 30 30"
-      fill="none"
-      aria-hidden="true"
-    >
-      <rect x="1" y="1" width="28" height="28" rx="8" fill="#2D5A4A" />
-      <path
-        d="M9 15.5L13.2 19.7L21 11"
-        stroke="#FAF9F6"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 
