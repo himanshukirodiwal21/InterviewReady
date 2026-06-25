@@ -11,25 +11,14 @@ const TYPE_LABELS = {
 export default function InterviewResults() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { type, difficulty, durationSeconds, results } = location.state || {};
+  const interview = location.state?.interview;
 
-  if (!results) {
+  if (!interview) {
     navigate("/interview/new", { replace: true });
     return null;
   }
 
-  const overall = Math.round(
-    results.reduce((sum, r) => sum + r.score, 0) / results.length
-  );
-
-  const avgCriteria = ["accuracy", "relevance", "communication", "completeness"].map(
-    (key) => ({
-      key,
-      label: key[0].toUpperCase() + key.slice(1),
-      value: Math.round(results.reduce((sum, r) => sum + r[key], 0) / results.length),
-    })
-  );
-
+  const { interviewType, difficulty, score, feedback, questions, durationSeconds } = interview;
   const minutes = Math.floor((durationSeconds || 0) / 60);
   const secs = (durationSeconds || 0) % 60;
 
@@ -38,55 +27,95 @@ export default function InterviewResults() {
       <div className="ir-results__inner">
         <p className="ir-results__eyebrow">Interview complete</p>
         <h1 className="ir-results__title">
-          {TYPE_LABELS[type]} — {difficulty[0].toUpperCase() + difficulty.slice(1)}
+          {TYPE_LABELS[interviewType]} — {difficulty[0].toUpperCase() + difficulty.slice(1)}
         </h1>
 
         <div className="ir-results__hero">
           <p className="ir-results__score">
-            {overall}
+            {score}
             <span className="ir-results__score-max">/100</span>
           </p>
           <p className="ir-results__meta-row">
-            {results.length} questions · {minutes}m {secs}s
+            {questions.length} questions · {minutes}m {secs}s
           </p>
-
-          <div className="ir-results__criteria">
-            {avgCriteria.map((c) => (
-              <div key={c.key} className="ir-results__criteria-item">
-                <div className="ir-results__criteria-head">
-                  <span className="ir-results__criteria-label">{c.label}</span>
-                  <span className="ir-results__criteria-value">{c.value}</span>
-                </div>
-                <div className="ir-results__track">
-                  <div className="ir-results__fill" style={{ width: `${c.value}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
+          {feedback && <p className="ir-results__summary">{feedback}</p>}
         </div>
 
         <h2 className="ir-results__section-title">Question-by-question feedback</h2>
 
-        {results.map((r, i) => (
+        {questions.map((q, i) => (
           <div key={i} className="ir-results__question-card">
             <div className="ir-results__question-head">
               <p className="ir-results__question-text">
-                {i + 1}. {r.question}
+                {i + 1}. {q.question}
               </p>
-              <span className="ir-results__question-score">{r.score}/100</span>
+              <span className="ir-results__question-score">{q.score}/100</span>
             </div>
+
+            {q.followUp && (
+              <p className="ir-results__answer-preview">
+                <strong>Follow-up asked:</strong> {q.followUp}
+              </p>
+            )}
+
             <p className="ir-results__answer-preview">
-              {r.answer.length > 160 ? r.answer.slice(0, 160) + "…" : r.answer}
+              {q.answer.length > 180 ? q.answer.slice(0, 180) + "…" : q.answer}
             </p>
-            <div className="ir-results__feedback-row">
-              <p className="ir-results__feedback-line">
-                <span className="ir-results__feedback-label">Strength: </span>
-                {r.strength}
-              </p>
-              <p className="ir-results__feedback-line">
-                <span className="ir-results__feedback-label">Suggestion: </span>
-                {r.suggestion}
-              </p>
+
+            <div className="ir-results__criteria-mini">
+              <span className="ir-results__criteria-mini-item">
+                Accuracy <span className="ir-results__criteria-mini-value">{q.accuracy}</span>
+              </span>
+              <span className="ir-results__criteria-mini-item">
+                Relevance <span className="ir-results__criteria-mini-value">{q.relevance}</span>
+              </span>
+              <span className="ir-results__criteria-mini-item">
+                Communication <span className="ir-results__criteria-mini-value">{q.communication}</span>
+              </span>
+              <span className="ir-results__criteria-mini-item">
+                Completeness <span className="ir-results__criteria-mini-value">{q.completeness}</span>
+              </span>
+            </div>
+
+            <div className="ir-results__feedback-block">
+              {q.mistakes?.length > 0 && (
+                <div>
+                  <p className="ir-results__feedback-group-title ir-results__feedback-group-title--mistakes">
+                    Mistakes
+                  </p>
+                  <ul className="ir-results__feedback-list">
+                    {q.mistakes.map((m, idx) => (
+                      <li key={idx}>{m}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {q.improvements?.length > 0 && (
+                <div>
+                  <p className="ir-results__feedback-group-title ir-results__feedback-group-title--improvements">
+                    Improvements
+                  </p>
+                  <ul className="ir-results__feedback-list">
+                    {q.improvements.map((imp, idx) => (
+                      <li key={idx}>{imp}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {q.thingsToKeepInMind?.length > 0 && (
+                <div>
+                  <p className="ir-results__feedback-group-title ir-results__feedback-group-title--mind">
+                    Things to keep in mind
+                  </p>
+                  <ul className="ir-results__feedback-list">
+                    {q.thingsToKeepInMind.map((t, idx) => (
+                      <li key={idx}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         ))}
