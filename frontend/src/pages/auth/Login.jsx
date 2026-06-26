@@ -1,5 +1,7 @@
 // src/pages/auth/Login.jsx
 import { useState, useEffect } from "react";
+import api, { setAccessToken } from "../../services/api";
+
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Mail,
@@ -115,6 +117,8 @@ export default function Login() {
 
       // axios response data
       const data = res.data;
+
+      setAccessToken(data.data.accessToken);
 
       const userData = {
         id: data.data.user._id || data.data.user.id,

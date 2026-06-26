@@ -214,6 +214,71 @@
   fill: var(--ir-ink-35);
 }
 
+/* ------------------------------- Criteria comparison ------------------------------- */
+
+.ir-criteria-compare {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.ir-criteria-compare__group-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ir-ink-70);
+  margin: 0 0 12px;
+}
+
+.ir-criteria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.ir-criteria__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ir-criteria__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.ir-criteria__label {
+  color: var(--ir-ink-70);
+}
+
+.ir-criteria__value {
+  font-family: var(--ir-font-mono);
+  color: var(--ir-signal);
+}
+
+.ir-criteria__track {
+  height: 6px;
+  width: 100%;
+  border-radius: var(--ir-radius-pill);
+  background: var(--ir-signal-soft);
+  overflow: hidden;
+}
+
+.ir-criteria__fill {
+  height: 100%;
+  border-radius: var(--ir-radius-pill);
+  background: var(--ir-signal);
+}
+
+.ir-criteria__fill--muted {
+  background: var(--ir-ink-35);
+}
+
+.ir-criteria__value--muted {
+  color: var(--ir-ink-45);
+}
+
 /* ------------------------------- Interview history ------------------------------- */
 
 .ir-history__list {
@@ -272,51 +337,7 @@
   color: var(--ir-ink-35);
 }
 
-/* ------------------------------- Criteria breakdown ------------------------------- */
-
-.ir-criteria {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.ir-criteria__item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.ir-criteria__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-}
-
-.ir-criteria__label {
-  color: var(--ir-ink-70);
-}
-
-.ir-criteria__value {
-  font-family: var(--ir-font-mono);
-  color: var(--ir-signal);
-}
-
-.ir-criteria__track {
-  height: 6px;
-  width: 100%;
-  border-radius: var(--ir-radius-pill);
-  background: var(--ir-signal-soft);
-  overflow: hidden;
-}
-
-.ir-criteria__fill {
-  height: 100%;
-  border-radius: var(--ir-radius-pill);
-  background: var(--ir-signal);
-}
-
-/* ------------------------------- Empty state ------------------------------- */
+/* ------------------------------- Empty states ------------------------------- */
 
 .ir-dash__empty {
   text-align: center;
@@ -329,11 +350,54 @@
   margin: 0 0 16px;
 }
 
+/* Full-page empty state, shown when the user has zero completed interviews */
+.ir-dash__full-empty {
+  text-align: center;
+  padding: 90px 24px;
+  background: var(--ir-white);
+  border: 1px solid var(--ir-line);
+  border-radius: var(--ir-radius-lg);
+}
+
+.ir-dash__full-empty-icon {
+  color: var(--ir-ink-35);
+  margin-bottom: 18px;
+}
+
+.ir-dash__full-empty-title {
+  font-family: var(--ir-font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ir-ink);
+  margin: 0 0 8px;
+}
+
+.ir-dash__full-empty-text {
+  font-size: 14.5px;
+  color: var(--ir-ink-60);
+  margin: 0 0 24px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ------------------------------- Loading state ------------------------------- */
+
+.ir-dash__loading {
+  text-align: center;
+  padding: 90px 24px;
+  font-size: 14px;
+  color: var(--ir-ink-45);
+}
+
 /* ====================================== Breakpoints ====================================== */
 
 @media (min-width: 640px) {
   .ir-dash__stats {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .ir-criteria-compare {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
