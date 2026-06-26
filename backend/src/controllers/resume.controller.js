@@ -4,7 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { askGeminiForJSON } from "../utils/gemini.js";
+import { askAIForJSON } from "../utils/ai.js";
 import { Resume } from "../models/resume.model.js";
 
 // FR-5: AI extracts skills, projects, technologies, experience level from
@@ -32,7 +32,7 @@ ${rawText.slice(0, 12000)}
 """
 `.trim();
 
-    return askGeminiForJSON(prompt);
+    return askAIForJSON(prompt);
 }
 
 // FR-4: Upload Resume (PDF) — stores in Cloudinary, extracts text, parses

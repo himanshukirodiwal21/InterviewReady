@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { askGemini, askGeminiForJSON } from "../utils/gemini.js";
+import { askAI, askAIForJSON } from "../utils/ai.js";
 import { Interview } from "../models/interview.model.js";
 import { Resume } from "../models/resume.model.js";
 
@@ -53,7 +53,7 @@ Return ONLY a JSON object with this exact shape, no other text:
 { "questions": ["question 1", "question 2", "question 3", "question 4", "question 5"] }
 `.trim();
 
-    const { questions } = await askGeminiForJSON(prompt);
+    const { questions } = await askAIForJSON(prompt);
 
     if (!Array.isArray(questions) || questions.length === 0) {
         throw new ApiError(500, "Failed to generate interview questions");
@@ -132,7 +132,7 @@ Return ONLY a JSON object with this exact shape, no other text:
 }
 `.trim();
 
-    const evaluation = await askGeminiForJSON(prompt);
+    const evaluation = await askAIForJSON(prompt);
     const score = weightedScore(evaluation);
 
     questionEntry.answer = answer;
@@ -194,7 +194,7 @@ summary text, no JSON, no quotes around it.
 
     let feedback = "";
     try {
-        feedback = (await askGemini(summaryPrompt)).trim();
+        feedback = (await askAI(summaryPrompt)).trim();
     } catch {
         feedback = `You scored ${overallScore}/100 across ${answered.length} questions.`;
     }
