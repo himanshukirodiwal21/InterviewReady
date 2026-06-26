@@ -52,7 +52,7 @@ export default function Footer() {
               and get scored the way a real interviewer would.
             </p>
           </div>
-          <a href="/signup" className="ir-footer__cta">
+          <a href="/register" className="ir-footer__cta">
             Start a free mock interview
             <ArrowUpRight size={15} strokeWidth={2.25} className="ir-footer__cta-icon" />
           </a>

@@ -166,10 +166,10 @@ export default function Dashboard() {
               <p className="ir-dash__empty-text">
                 No interviews yet — your first session will show up here.
               </p>
-              <a href="/interview/new" className="ir-dash__cta">
+              <Link href="/interview/new" className="ir-dash__cta">
                 Start a mock interview
                 <ArrowRight size={15} strokeWidth={2.25} />
-              </a>
+              </Link>
             </div>
           ) : (
             <div className="ir-history__list">

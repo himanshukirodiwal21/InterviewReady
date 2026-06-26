@@ -94,7 +94,7 @@ function Hero() {
           </p>
 
           <div className="ir-hero__actions">
-            <a href="/signup" className="ir-hero__cta">
+            <a href="/interview/new" className="ir-hero__cta">
               Start a mock interview
               <ArrowRight size={16} strokeWidth={2.25} className="ir-hero__cta-icon" />
             </a>
@@ -348,7 +348,7 @@ function FinalCta() {
           <br />
           Make sure you're ready for it.
         </h2>
-        <a href="/signup" className="ir-final-cta__button">
+        <a href="/interview/new" className="ir-final-cta__button">
           Start your first mock interview, free
           <ArrowRight
             size={16}

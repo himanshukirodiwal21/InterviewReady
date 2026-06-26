@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ArrowRight, UserCircle2 } from "lucide-react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png"
@@ -48,10 +49,10 @@ export default function Navbar() {
   return (
     <header className="ir-navbar">
       <div className="ir-navbar__inner">
-        <a href="/" className="ir-navbar__brand">
+        <Link to="/" className="ir-navbar__brand">
           <img src={logo} alt="InterviewReady Logo" width="50" />
           <span className="ir-navbar__brand-name">InterviewReady</span>
-        </a>
+        </Link>
 
         <nav className="ir-navbar__links">
           {NAV_LINKS.map((link) => (
@@ -76,7 +77,7 @@ export default function Navbar() {
               <a href="/login" className="ir-navbar__login">
                 <span>Login</span>
               </a>
-              <a href="/signup" className="ir-navbar__cta">
+              <a href="/interview/new" className="ir-navbar__cta">
                 Start a mock interview
                 <ArrowRight size={15} strokeWidth={2.25} className="ir-navbar__cta-icon" />
               </a>
@@ -124,7 +125,7 @@ export default function Navbar() {
                 <a href="/login" className="ir-navbar__mobile-login">
                   <span>Login</span>
                 </a>
-                <a href="/signup" className="ir-navbar__mobile-cta">
+                <a href="/register" className="ir-navbar__mobile-cta">
                   Start a mock interview
                 </a>
               </>
