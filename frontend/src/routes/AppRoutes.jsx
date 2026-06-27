@@ -9,16 +9,19 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import InterviewSetup from "../pages/interview/InterviewSetup";
 import InterviewSession from "../pages/interview/InterviewSession";
 import InterviewResults from "../pages/interview/InterviewResults";
-import api, { setAccessToken } from "../services/api";
+import api from "../services/api";
 
 function AppRoutes() {
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    // Silently checks whether the user already has a valid refreshToken
+    // cookie from a previous session. The cookie itself is what matters —
+    // we don't need to do anything with the response here, since every
+    // subsequent request just relies on the cookie being present.
     const tryRefresh = async () => {
       try {
-        const res = await api.post("/api/v1/users/refresh-token");
-        setAccessToken(res.data.data.accessToken);
+        await api.post("/api/v1/users/refresh-token");
       } catch {
         // no valid refresh cookie — user just isn't logged in, that's fine
       } finally {
