@@ -1,43 +1,26 @@
 import "dotenv/config";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-console.log("GMAIL_USER:", process.env.GMAIL_USER);
 console.log(
-    "GMAIL_APP_PASSWORD:",
-    process.env.GMAIL_APP_PASSWORD ? "FOUND" : "MISSING"
+    "RESEND_API_KEY:",
+    process.env.RESEND_API_KEY ? "FOUND" : "MISSING"
 );
 
-// Render's network has been confirmed (via real ENETUNREACH errors in
-// production logs) to be unable to reach Gmail's default SSL port (465).
-// Port 587 with STARTTLS is the standard fallback. We also set explicit
-// timeouts so that if 587 is ALSO blocked, the request fails within a few
-// seconds with a clear error — instead of hanging forever the way it did
-// on port 465, which left the frontend stuck on "Sending OTP..." with no
-// feedback at all.
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // STARTTLS, not SSL — required for port 587
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-    },
-    connectionTimeout: 8000, // fail fast instead of hanging if the port is blocked
-    greetingTimeout: 8000,
-    socketTimeout: 8000,
-});
+// Render's network has confirmed-blocked outbound SMTP on both port 465
+// (ENETUNREACH) and port 587 (ETIMEDOUT) — this isn't a port-specific
+// issue, Render blocks outbound SMTP entirely on this plan. Resend sends
+// email over a normal HTTPS API call instead of SMTP, so it isn't
+// affected by this class of network restriction at all.
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-transporter.verify((error, success) => {
-    if (error) {
-        console.log("SMTP ERROR:", error);
-    } else {
-        console.log("SMTP READY");
-    }
-});
+// onboarding@resend.dev is Resend's shared test sender — works immediately
+// with no domain setup. Once you verify your own domain in the Resend
+// dashboard, swap this for something like "InterviewReady <noreply@yourdomain.com>".
+const FROM_ADDRESS = "InterviewReady <onboarding@resend.dev>";
 
 export const sendOTPEmail = async (toEmail, otp) => {
-    await transporter.sendMail({
-        from: `"InterviewReady" <${process.env.GMAIL_USER}>`,
+    const { data, error } = await resend.emails.send({
+        from: FROM_ADDRESS,
         to: toEmail,
         subject: "Your InterviewReady verification code",
         html: `
@@ -54,4 +37,11 @@ export const sendOTPEmail = async (toEmail, otp) => {
       </div>
     `,
     });
+
+    if (error) {
+        console.log("RESEND ERROR:", error);
+        throw new Error(error.message || "Failed to send OTP email");
+    }
+
+    console.log("Email sent via Resend, id:", data?.id);
 };
